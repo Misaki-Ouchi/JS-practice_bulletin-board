@@ -1,0 +1,12 @@
+header {
+  padding: 0;
+  margin: 0;
+}
+h1 {
+  font-size: 1.4rem;
+  background-color: #ada;
+  padding: 1rem 0;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
