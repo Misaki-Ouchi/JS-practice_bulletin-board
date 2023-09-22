@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import "./main.css";
 import TopTitle from './TopTitle';
 import ThreadTitles from './ThreadTitles';
+import ThreadComments from './ThreadComments';
 // import App from './App';
 
 // const {titles} = ThreadTitles()
@@ -14,5 +15,6 @@ root.render(
     {/* <App /> */}
     <button href="/">新規スレッドを書く</button>
     <ThreadTitles />
+    <ThreadComments />
   </React.StrictMode>
 );
