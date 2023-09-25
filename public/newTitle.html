@@ -6,6 +6,12 @@
     <title>新規スレッドを書く</title>
 </head>
 <body>
-    
+    <form action="/" method="post" novalidate>
+        タイトル：<input name="title" type="text"><br>
+        名前：<input name="user_name" type=""><br>
+        <textarea name="message" cols="50" rows="10"></textarea>
+        <input type="hidden" name="post_time"></input>
+        <p><input type="submit" value="送信"></p>
+    </form>
 </body>
 </html>
