@@ -1,28 +1,13 @@
-import { useState, useEffect } from "react";
-import ReactDom from "react-dom";
+import { useContext } from "react";
+import { Comments } from "./App";
 import "./main.css";
-import axios from "axios";
-// import useTitles from "./useTitles";
 
-const url = "http://localhost:3000/api/get/comments";
+const ThreadComments = (props) => {
+  const comments = useContext(Comments)
 
-function ThreadComments(props) {
-
-  const [comments, setComments] = useState([]);
-  const [newComments, setNewComments] = useState({
-    title: "ちいかわを語る",
-    user_name: "",
-    message: "",
-    post_time: "",
-  });
-
-  useEffect(() => {
-    axios.get(url).then((response) => setComments(response.data));
-  }, []);
-
-  const submitComment = (e) => {
-    setNewComments((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  // const submitComment = (e) => {
+  //   setNewComments((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // };
   // const submitComment = () => {
 
   // axios.post(url, );
@@ -31,9 +16,10 @@ function ThreadComments(props) {
   return (
     <>
       <ul>
-        {Object.values(comments).map((val, index) => {
+        {
+          Object.values(comments).map((val, index) => {
           return (
-            val.title === "ちいかわを語る" && (
+            val.title === props.title && (
               <li key={index}>
                 <h3>
                   {val.comment_count} 名前：{val.user_name}：{val.post_date}
@@ -42,7 +28,8 @@ function ThreadComments(props) {
               </li>
             )
           );
-        })}
+        })
+        }
       </ul>
       名前：
       <input type="text" name="user_name" />
