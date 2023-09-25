@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "./main.css";
-import Axios from "axios";
+import axios from "axios";
 
 // 関数内はレンダリング用、外に固定データ・ロジック
 
@@ -8,7 +8,7 @@ function ThreadTitles() {
   const [titleList, setTitleList] = useState([]);
 
   useEffect(() => {
-    Axios.get("http://localhost:3000/api/get/titles")
+    axios.get("http://localhost:3000/api/get/titles")
       .then((response) => setTitleList(response.data))
   }, []);
 
