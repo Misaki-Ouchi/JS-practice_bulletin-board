@@ -1,15 +1,23 @@
 import React, { useState, useEffect, createContext } from "react";
-import ReactDOM from "react-dom/client";
 import axios from "axios";
 import TopTitle from "./TopTitle";
 import ThreadTitles from "./ThreadTitles";
 import ThreadComments from "./ThreadComments";
+import NewComments from "./NewComments";
+
+import SideMenus from "./SideMenus";
+import LogInForm from "./LogInForm";
+import SignUpForm from "./SignUpForm";
+import SuccessSignUp from "./SuccessSignUp";
+
 import "./main.css";
 
 export const Comments = createContext();
 export const Titles = createContext();
 
-function App() {
+// ※serverのindex.jsでcommentsを投稿日時順に並べ替える
+// →同じtitleの投稿の数をtitlesに格納
+const App = () => {
   // 投稿データ取得
   const [comments, setComments] = useState([]);
   useEffect(() => {
@@ -31,18 +39,23 @@ function App() {
 
   return (
     <>
+      <SideMenus />
+
       <TopTitle />
       <a href="./newTitle.html">新規スレッドを書く</a>
       <br />
       <Comments.Provider value={comments}>
-      <Titles.Provider value={titles, comments}>
+      <Titles.Provider value={titles}>
         <ThreadTitles/>
-      </Titles.Provider>
         <br />
+        <ThreadComments title="あの件について" count="4" />
         <ThreadComments title="ちいかわを語る" count="4" />
+        <ThreadComments title="おにぎりの握り方" count="4" />
+      </Titles.Provider>
       </Comments.Provider>
+      <NewComments title="ちいかわを語る" />
     </>
   );
-}
+};
 
 export default App;

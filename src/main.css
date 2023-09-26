@@ -1,15 +1,86 @@
+body {
+  padding: 0 1rem;
+  margin: auto;
+}
 header {
   padding: 0;
   margin: 0;
 }
+p, a, span, label {
+  font-size: 0.85rem;
+}
+a {
+  text-decoration: none;
+  color: #00f;
+}
 h1 {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   background-color: #ada;
   padding: 1rem 0;
-  margin: 0 auto;
+  margin: 2rem auto;
   width: 80%;
   text-align: center;
 }
+h2 {
+  font-size: 1rem;
+}
+h3 {
+  font-size: 0.9rem;
+}
 li {
   list-style: none;
+}
+.thread,
+.formContainer,
+.sideMenu {
+  background-color: #ddd;
+  width: 80%;
+  padding: 1rem;
+  margin: 1rem auto 2rem;
+}
+.sideMenu {
+  width: 30%;
+  margin-right: 0;
+}
+.sideItems {
+  text-align: center;
+}
+.toSignUp {
+  text-align: right;
+}
+.toSignUp a {
+  font-size: 0.65rem;
+}
+.formContainer h2 {
+  text-align: center;
+}
+.uniForm {
+  width: 80%;
+  margin: 0 auto 2rem;
+}
+.formField {
+  margin-bottom: 1rem;
+}
+.formField input {
+  width: 100%;
+}
+.submitButton {
+  display: block;
+  width: 8rem;
+  padding: 0.2rem;
+  margin: 1rem auto;
+  background-color: #17f;
+  border: none;
+  color: #fff;
+}
+.errorMsg {
+  color: red;
+  font-size: 0.9rem;
+  margin: 0;
+}
+.msgOK {
+  color: #17f;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0;
 }
