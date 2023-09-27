@@ -1,44 +1,55 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./main.css";
 
-const NewComments = () => {
-  const initialValues = { email: "", password: "" };
+const NewComments = (props) => {
+  const initialValues = {
+    title: "",
+    name: "",
+    email: "",
+    message: "",
+    post_time: "",
+  };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
   const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
-
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormValues({ ...formValues, [name]: value }); // e.targetで取ってきたname, valueをformValuesの空のプロパティと値にそれぞれ代入
+    setFormValues({ ...formValues, [name]: value });
   };
   const handleSubmit = (e) => {
-    e.preventDefault(); // 自動更新無効化
+    e.preventDefault();
     setFormErrors(validate(formValues));
     setIsSubmit(true);
+    // タイトル、日時情報の追加
+    formValues.title = props.title;
+    formValues.post_time = new Date();
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
-        .post("http://localhost:3000/login", formValues)
+        .post("http://localhost:3000/postComment", formValues)
         .then((res) => {
-          if (res.data !== "Failed") {
-            console.log(res.data);
-            navigate("/");
-          } else {
-            alert("No record existed");
-          }
+          console.log(res.data);
+          navigate("/");
         })
-        .catch((err) => console.log(err));
+        .catch(err => console.log(err));
     }
   };
   const validate = (values) => {
     const errors = {};
+    const regex =
+      /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
     if (!values.name) {
       errors.name = "名前を入力してください。";
     }
     if (!values.email) {
       errors.email = "ID（メールアドレス）を入力してください。";
+    } else if (!regex.test(values.email)) {
+      errors.email = "正しいメールアドレスを入力してください。";
+    }
+    if (!values.message) {
+      errors.message = "コメントを入力してください。";
     }
     return errors;
   };
@@ -48,28 +59,30 @@ const NewComments = () => {
       <div className="formContainer">
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="uniForm">
-            <div className="formField">
-              <label htmlFor="名前">名前</label>
-              <br />
-              <input
-                id="name"
-                type="text"
-                name="name"
-                onChange={(e) => handleChange(e)}
-              />
-              <br/>
-              <span className="errorMsg">{formErrors.name}</span>
-            </div>
-            <div className="formField">
-              <label htmlFor="email">email</label>
-              <br />
-              <input
-                id="email"
-                type="text"
-                name="email"
-                onChange={(e) => handleChange(e)}
-              />
-              <p className="errorMsg">{formErrors.email}</p>
+            <div className="newCommentFlex">
+              <div className="formField formFieldA">
+                <label htmlFor="名前">名前</label>
+                <br />
+                <input
+                  id="name"
+                  type="text"
+                  name="name"
+                  onChange={(e) => handleChange(e)}
+                />
+                <br />
+                <span className="errorMsg">{formErrors.name}</span>
+              </div>
+              <div className="formField formFieldA">
+                <label htmlFor="email">email</label>
+                <br />
+                <input
+                  id="email"
+                  type="text"
+                  name="email"
+                  onChange={(e) => handleChange(e)}
+                />
+                <p className="errorMsg">{formErrors.email}</p>
+              </div>
             </div>
             <div className="formField">
               <label htmlFor="コメント">コメント</label>
