@@ -1,33 +1,92 @@
-import { useContext } from "react";
 import { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+import axios from "axios";
 import "./main.css";
-import { Comments } from "./App";
 
-const NewComments = (props) => {
-  const comments = useContext(Comments);
-  const title = props.title
-  console.log(title)
-  // const submitComment = (e) => {
-  //   setNewComments((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-  // };
-  // const submitComment = () => {
+const NewComments = () => {
+  const initialValues = { email: "", password: "" };
+  const [formValues, setFormValues] = useState(initialValues);
+  const [formErrors, setFormErrors] = useState({});
+  const navigate = useNavigate();
+  const [isSubmit, setIsSubmit] = useState(false);
 
-  // axios.post(url, );
-  // }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormValues({ ...formValues, [name]: value }); // e.targetで取ってきたname, valueをformValuesの空のプロパティと値にそれぞれ代入
+  };
+  const handleSubmit = (e) => {
+    e.preventDefault(); // 自動更新無効化
+    setFormErrors(validate(formValues));
+    setIsSubmit(true);
+    if (Object.keys(formErrors).length === 0 && isSubmit) {
+      axios
+        .post("http://localhost:3000/login", formValues)
+        .then((res) => {
+          if (res.data !== "Failed") {
+            console.log(res.data);
+            navigate("/");
+          } else {
+            alert("No record existed");
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  };
+  const validate = (values) => {
+    const errors = {};
+    if (!values.name) {
+      errors.name = "名前を入力してください。";
+    }
+    if (!values.email) {
+      errors.email = "ID（メールアドレス）を入力してください。";
+    }
+    return errors;
+  };
 
   return (
-    <div className="formContainer">
-      <form action="">
-        <label htmlFor="名前">名前：</label>
-        <input id="name" type="text" name="name" />
-        <label htmlFor="email">email：</label>
-        <input id="email" type="text" name="email" />
-        <label htmlFor="タイトル">タイトル</label>
-        <input id="title" type="text" name="title" />
-        <br />
-        <textarea id="message" name="message" cols="80" rows="10"></textarea>
-        <button onClick="submitComment">書き込む</button>
-      </form>
+    <div className="newComment">
+      <div className="formContainer">
+        <form onSubmit={(e) => handleSubmit(e)}>
+          <div className="uniForm">
+            <div className="formField">
+              <label htmlFor="名前">名前</label>
+              <br />
+              <input
+                id="name"
+                type="text"
+                name="name"
+                onChange={(e) => handleChange(e)}
+              />
+              <br/>
+              <span className="errorMsg">{formErrors.name}</span>
+            </div>
+            <div className="formField">
+              <label htmlFor="email">email</label>
+              <br />
+              <input
+                id="email"
+                type="text"
+                name="email"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className="errorMsg">{formErrors.email}</p>
+            </div>
+            <div className="formField">
+              <label htmlFor="コメント">コメント</label>
+              <br />
+              <textarea
+                id="message"
+                type="text"
+                name="message"
+                rows="10"
+                onChange={(e) => handleChange(e)}
+              />
+              <p className="errorMsg">{formErrors.message}</p>
+            </div>
+          </div>
+          <button className="submitButton">書き込む</button>
+        </form>
+      </div>
     </div>
   );
 };

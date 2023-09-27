@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
-import TopTitle from "./TopTitle";
+import Header from "./Header";
 import WriteNewTitle from "./WriteNewTitle";
 import ThreadTitles from "./ThreadTitles";
 import ThreadComments from "./ThreadComments";
@@ -16,8 +16,9 @@ export const Titles = createContext();
 // ※serverのindex.jsでcommentsを投稿日時順に並べ替える
 // →同じtitleの投稿の数をtitlesに格納
 const App = () => {
-  // 投稿データ取得
   const [comments, setComments] = useState([]);
+  const [titles, setTitles] = useState([]);
+  // 投稿データ取得
   useEffect(() => {
     const url = "http://localhost:3000/api/get/comments";
     axios
@@ -26,7 +27,6 @@ const App = () => {
       .catch((error) => console.log(error));
   }, [setComments]);
   // タイトル一覧データ取得
-  const [titles, setTitles] = useState([]);
   useEffect(() => {
     const url = "http://localhost:3000/api/get/titles";
     axios
@@ -37,19 +37,21 @@ const App = () => {
 
   return (
     <>
-      <SideMenus />
 
-      <TopTitle />
-      <WriteNewTitle />
-      <Comments.Provider value={comments}>
-      <Titles.Provider value={titles}>
-        <ThreadTitles/>
-        <ThreadComments title="あの件について" count="4" />
-        <ThreadComments title="ちいかわを語る" count="4" />
-        <ThreadComments title="おにぎりの握り方" count="4" />
-      </Titles.Provider>
-      </Comments.Provider>
-      <NewComments title="ちいかわを語る" />
+      <Header />
+      <main>
+        <NewComments title="ちいかわを語る" />
+        <SideMenus />
+        <WriteNewTitle />
+        <Comments.Provider value={comments}>
+        <Titles.Provider value={titles}>
+          <ThreadTitles/>
+          <ThreadComments title="あの件について" count="4" />
+          <ThreadComments title="ちいかわを語る" count="4" />
+          <ThreadComments title="おにぎりの握り方" count="4" />
+        </Titles.Provider>
+        </Comments.Provider>
+      </main>
       <Footer />
     </>
   );

@@ -1,4 +1,4 @@
-import TopTitle from "./../TopTitle";
+import TopTitle from "../Header";
 import LogInForm from "./../LogInForm";
 import Footer from "./../Footer";
 

@@ -22,7 +22,8 @@ const LogInForm = () => {
       axios
         .post("http://localhost:3000/login", formValues)
         .then((res) => {
-          if (res.data === "Success") {
+          if (res.data !== "Failed") {
+            console.log(res.data)
             navigate('/')
           } else {
             alert("No record existed")
@@ -33,12 +34,8 @@ const LogInForm = () => {
   };
   const validate = (values) => {
     const errors = {};
-    const regex =
-      /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
     if (!values.email) {
-      errors.email = "IDを入力してください。";
-    } else if (!regex.test(values.email)) {
-      errors.email = "正しいメールアドレスを入力してください。";
+      errors.email = "ID（メールアドレス）を入力してください。";
     }
     if (!values.password) {
       errors.password = "パスワードを入力してください。";
@@ -48,7 +45,7 @@ const LogInForm = () => {
 
   return (
     <div className="formContainer">
-      <form onSubmit={(e) => handleSubmit(e)} action="">
+      <form onSubmit={(e) => handleSubmit(e)}>
         <h2>ユーザーログイン</h2>
         <div className="uniForm">
           <div className="formField">

@@ -22,11 +22,9 @@ const SignUpForm = () => {
       axios
         .post("http://localhost:3000/users", formValues)
         .then((res) => {
-          console.log(res.data);
           navigate("/successSignUp");
         })
-        .catch((err) => console.log(err));
-      console.log(formValues);
+        .catch(err => console.log(err));
     }
   };
   const validate = (values) => {
