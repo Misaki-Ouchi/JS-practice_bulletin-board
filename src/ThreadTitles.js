@@ -8,9 +8,11 @@ function ThreadTitles() {
 
   return (
     <>
-      {Object.values(titles).map((val, index) => {
-        return <span key={index}>{val.title}(),</span>
-      })}
+      <div className="threadTitles">
+        {Object.values(titles).map((val, index) => {
+          return <span key={index}>{val.title}(),</span>
+        })}
+      </div>
     </>
   );
 }

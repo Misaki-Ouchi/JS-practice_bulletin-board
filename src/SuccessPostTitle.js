@@ -2,13 +2,12 @@ import {Link} from "react-router-dom"
 
 import "./main.css";
 
-const SuccessSignUp = () => {
+const SuccessPostTitle = () => {
   return (
     <>
       <div className="success">
         <p>
-          <span>ユーザー登録が完了しました。</span><br/>
-          <span>ようこそ{ }さん</span><br/>
+          新規投稿が完了しました。
         </p>
         <Link to="/">掲示板トップへ戻る</Link>
       </div>
@@ -17,4 +16,4 @@ const SuccessSignUp = () => {
   );
 }
 
-export default SuccessSignUp;
+export default SuccessPostTitle;

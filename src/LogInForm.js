@@ -1,7 +1,7 @@
 import { useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
-import "./main.css";
 import axios from "axios";
+import "./main.css";
 
 const LogInForm = () => {
   const initialValues = { email: "", password: "" };
@@ -14,7 +14,6 @@ const LogInForm = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value }); // e.targetで取ってきたname, valueをformValuesの空のプロパティと値にそれぞれ代入
   };
-
   const handleSubmit = (e) => {
     e.preventDefault(); // 自動更新無効化
     setFormErrors(validate(formValues));
@@ -24,7 +23,7 @@ const LogInForm = () => {
         .post("http://localhost:3000/login", formValues)
         .then((res) => {
           if (res.data === "Success") {
-            navigate('/home')
+            navigate('/')
           } else {
             alert("No record existed")
           }
@@ -32,7 +31,6 @@ const LogInForm = () => {
         .then((err) => console.log(err));
     }
   };
-
   const validate = (values) => {
     const errors = {};
     const regex =

@@ -1,5 +1,4 @@
 body {
-  padding: 0 1rem;
   margin: auto;
 }
 header {
@@ -12,6 +11,9 @@ p, a, span, label {
 a {
   text-decoration: none;
   color: #00f;
+}
+a h1 { /* topTitle */
+  color: #000;
 }
 h1 {
   font-size: 1.2rem;
@@ -27,17 +29,53 @@ h2 {
 h3 {
   font-size: 0.9rem;
 }
+ul {
+  padding: 0;
+}
 li {
   list-style: none;
 }
+footer {
+  background-color: #aaa;
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 3rem;
+}
+
+.writeNewTitle,
 .thread,
+.threadTitles,
 .formContainer,
 .sideMenu {
   background-color: #ddd;
   width: 80%;
   padding: 1rem;
-  margin: 1rem auto 2rem;
+  margin: 0 auto;
 }
+.writeNewTitle {
+  margin-bottom: 0.5rem;
+}
+.threadTitles {
+  margin-bottom: 3rem;
+}
+.thread {
+  margin-bottom: 1rem;
+}
+.success {
+  padding: 1rem;
+  text-align: center;
+}
+
+/*-------------------------
+  スレッド
+-------------------------*/
+.threadWrap {
+  padding: 0 1rem;
+}
+
+/*-------------------------
+  ハンバーガーメニュー
+-------------------------*/
 .sideMenu {
   width: 30%;
   margin-right: 0;
@@ -61,8 +99,10 @@ li {
 .formField {
   margin-bottom: 1rem;
 }
-.formField input {
+.formField input,
+.formField textarea {
   width: 100%;
+  padding: 0.2rem 0;
 }
 .submitButton {
   display: block;

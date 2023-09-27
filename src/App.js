@@ -1,14 +1,12 @@
 import React, { useState, useEffect, createContext } from "react";
 import axios from "axios";
 import TopTitle from "./TopTitle";
+import WriteNewTitle from "./WriteNewTitle";
 import ThreadTitles from "./ThreadTitles";
 import ThreadComments from "./ThreadComments";
 import NewComments from "./NewComments";
-
 import SideMenus from "./SideMenus";
-import LogInForm from "./LogInForm";
-import SignUpForm from "./SignUpForm";
-import SuccessSignUp from "./SuccessSignUp";
+import Footer from "./Footer";
 
 import "./main.css";
 
@@ -42,18 +40,17 @@ const App = () => {
       <SideMenus />
 
       <TopTitle />
-      <a href="./newTitle.html">新規スレッドを書く</a>
-      <br />
+      <WriteNewTitle />
       <Comments.Provider value={comments}>
       <Titles.Provider value={titles}>
         <ThreadTitles/>
-        <br />
         <ThreadComments title="あの件について" count="4" />
         <ThreadComments title="ちいかわを語る" count="4" />
         <ThreadComments title="おにぎりの握り方" count="4" />
       </Titles.Provider>
       </Comments.Provider>
       <NewComments title="ちいかわを語る" />
+      <Footer />
     </>
   );
 };

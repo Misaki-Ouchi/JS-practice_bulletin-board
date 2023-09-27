@@ -14,7 +14,6 @@ const SignUpForm = () => {
     const { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value }); // e.targetで取ってきたname, valueをformValuesの空のプロパティと値にそれぞれ代入
   };
-
   const handleSubmit = (e) => {
     e.preventDefault(); // 自動更新無効化
     setFormErrors(validate(formValues));
@@ -22,17 +21,16 @@ const SignUpForm = () => {
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
         .post("http://localhost:3000/signup", formValues)
-        .then((res) => navigate('/login'))
-        .then((err) => console.log(err));
+        .then(res => navigate('/successSignUp'))
+        .catch(err => console.log(err));
     }
   };
-
   const validate = (values) => {
     const errors = {};
     const regex =
       /^[a-zA-Z0-9_.+-]+@([a-zA-Z0-9][a-zA-Z0-9-]*[a-zA-Z0-9]*\.)+[a-zA-Z]{2,}$/;
     if (!values.name) {
-      errors.email = "名前を入力してください。";
+      errors.name = "名前を入力してください。";
     }
     if (!values.email) {
       errors.email = "ID（メールアドレス）を入力してください。";
@@ -42,7 +40,6 @@ const SignUpForm = () => {
     if (!values.password) {
       errors.password = "パスワードを入力してください。";
     }
-    console.log(errors);
     return errors;
   };
 
