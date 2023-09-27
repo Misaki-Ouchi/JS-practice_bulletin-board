@@ -37,19 +37,20 @@ const App = () => {
 
   return (
     <>
-
       <Header />
       <main>
-        <NewComments title="ちいかわを語る" />
         <SideMenus />
         <WriteNewTitle />
         <Comments.Provider value={comments}>
-        <Titles.Provider value={titles}>
-          <ThreadTitles/>
-          <ThreadComments title="あの件について" count="4" />
-          <ThreadComments title="ちいかわを語る" count="4" />
-          <ThreadComments title="おにぎりの握り方" count="4" />
-        </Titles.Provider>
+          <Titles.Provider value={titles}>
+            <ThreadTitles />
+            <ThreadComments num="1" title="あの件について" count="4" />
+            <NewComments title="あの件について" />
+            <ThreadComments num="2" title="ちいかわを語る" count="4" />
+            <NewComments title="ちいかわを語る" />
+            <ThreadComments num="3" title="おにぎりの握り方" count="4" />
+            <NewComments title="おにぎりの握り方" />
+          </Titles.Provider>
         </Comments.Provider>
       </main>
       <Footer />

@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { Comments } from "./App";
+import NewComments from "./NewComments";
 import "./main.css";
 
 const ThreadComments = (props) => {
@@ -8,7 +9,10 @@ const ThreadComments = (props) => {
   return (
     <div className="thread">
       <div className="threadWrap">
-        <h2>{props.title}</h2>
+        <h2>
+          <span className="threadTitleSpan">No{props.num}</span>
+          {props.title}
+        </h2>
         <ul>
           {Object.values(comments).map((val, index) => {
             return (

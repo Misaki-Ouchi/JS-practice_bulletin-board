@@ -10,6 +10,7 @@ const NewComments = (props) => {
     email: "",
     message: "",
     post_time: "",
+    time: ""
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -24,8 +25,18 @@ const NewComments = (props) => {
     setFormErrors(validate(formValues));
     setIsSubmit(true);
     // タイトル、日時情報の追加
+    const date = new Date()
+    const month = date.getMonth() + 1
+    const week = ["日", "月", "火", "水", "木", "金", "土",]
+    const mil = Math.round(date.getMilliseconds())
+    const a = date.getFullYear() + "/" + month + "/" + date.getDate() + "(" + week[date.getDay()] + ")"
+    const b = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "." + mil
+    const time = `${a} ${b}`
     formValues.title = props.title;
-    formValues.post_time = new Date();
+    formValues.post_time = date.getTime()
+    formValues.time = time
+    
+    
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
         .post("http://localhost:3000/postComment", formValues)
@@ -35,6 +46,7 @@ const NewComments = (props) => {
         })
         .catch(err => console.log(err));
     }
+    console.log(formValues)
   };
   const validate = (values) => {
     const errors = {};

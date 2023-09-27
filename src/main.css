@@ -71,7 +71,11 @@ footer {
   margin-bottom: 3rem;
 }
 .thread {
-  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.threadTitleSpan {
+  font-size: 1rem;
+  margin-right: 0.3rem;
 }
 .success {
   padding: 1rem;
