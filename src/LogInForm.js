@@ -28,7 +28,7 @@ const LogInForm = () => {
             alert("No record existed")
           }
         })
-        .then((err) => console.log(err));
+        .catch(err => console.log(err));
     }
   };
   const validate = (values) => {

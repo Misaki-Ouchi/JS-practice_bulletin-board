@@ -7,7 +7,7 @@ const SignUpForm = () => {
   const initialValues = { name: "", email: "", password: "" };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
 
   const handleChange = (e) => {
@@ -20,9 +20,13 @@ const SignUpForm = () => {
     setIsSubmit(true);
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
-        .post("http://localhost:3000/signup", formValues)
-        .then(res => navigate('/successSignUp'))
-        .catch(err => console.log(err));
+        .post("http://localhost:3000/users", formValues)
+        .then((res) => {
+          console.log(res.data);
+          navigate("/successSignUp");
+        })
+        .catch((err) => console.log(err));
+      console.log(formValues);
     }
   };
   const validate = (values) => {
