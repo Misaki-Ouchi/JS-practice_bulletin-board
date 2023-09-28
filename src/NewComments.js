@@ -28,7 +28,7 @@ const NewComments = (props) => {
     const date = new Date()
     const month = date.getMonth() + 1
     const week = ["日", "月", "火", "水", "木", "金", "土",]
-    const mil = Math.round(date.getMilliseconds())
+    const mil = Math.round(date.getMilliseconds()/10)
     const a = date.getFullYear() + "/" + month + "/" + date.getDate() + "(" + week[date.getDay()] + ")"
     const b = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "." + mil
     const time = `${a} ${b}`

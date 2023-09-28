@@ -1,6 +1,5 @@
 import { useContext } from "react";
 import { Comments } from "./App";
-import NewComments from "./NewComments";
 import "./main.css";
 
 const ThreadComments = (props) => {
@@ -34,7 +33,7 @@ const ThreadComments = (props) => {
               val.title === props.title && (
                 <li key={index}>
                   <h3>
-                    {val.comment_count} 名前：{val.name}：{val.post_date}
+                    {val.comment_count} 名前：{val.name}：{val.time}
                   </h3>
                   <p>{val.message}</p>
                 </li>

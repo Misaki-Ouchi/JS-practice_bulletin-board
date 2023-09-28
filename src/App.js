@@ -14,7 +14,10 @@ export const Comments = createContext();
 export const Titles = createContext();
 
 // ※serverのindex.jsでcommentsを投稿日時順に並べ替える
+// →同じtitleの投稿に各indexを付ける
 // →同じtitleの投稿の数をtitlesに格納
+// 投稿時に、titlesの数を取得して+1をboard_idとしてcommentsに格納
+
 const App = () => {
   const [comments, setComments] = useState([]);
   const [titles, setTitles] = useState([]);
