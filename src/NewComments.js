@@ -5,12 +5,13 @@ import "./main.css";
 
 const NewComments = (props) => {
   const initialValues = {
-    title: "",
+    title_id: props.title_id,
+    title: props.title,
     name: "",
     email: "",
     message: "",
     post_time: "",
-    time: ""
+    time: "",
   };
   const [formValues, setFormValues] = useState(initialValues);
   const [formErrors, setFormErrors] = useState({});
@@ -32,7 +33,7 @@ const NewComments = (props) => {
     const a = date.getFullYear() + "/" + month + "/" + date.getDate() + "(" + week[date.getDay()] + ")"
     const b = date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds() + "." + mil
     const time = `${a} ${b}`
-    formValues.title = props.title;
+    // formValues.title = props.title;
     formValues.post_time = date.getTime()
     formValues.time = time
     // データ送信
@@ -41,7 +42,7 @@ const NewComments = (props) => {
         .post("http://localhost:3000/postComment/comments", formValues)
         .catch(err => console.log(err));
       axios
-        .post(`http://localhost:3000/postComment/titles/${formValues.title}`, formValues)
+        .post(`http://localhost:3000/postComment/titles/${props.title_id}`, formValues)
         .then(res => navigate("/"))
         .catch(err => console.log(err));
     }
