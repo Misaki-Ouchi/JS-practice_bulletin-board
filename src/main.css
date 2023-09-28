@@ -138,9 +138,6 @@ footer {
   width: 95%;
   margin-bottom: 0;
 }
-.newComment input {
-  width: 10rem;
-}
 .newComment .submitButton {
   margin: 0 0.5rem 0.5rem auto;
 }

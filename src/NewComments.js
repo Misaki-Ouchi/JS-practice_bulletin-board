@@ -35,15 +35,14 @@ const NewComments = (props) => {
     formValues.title = props.title;
     formValues.post_time = date.getTime()
     formValues.time = time
-    
-    
+    // データ送信
     if (Object.keys(formErrors).length === 0 && isSubmit) {
       axios
-        .post("http://localhost:3000/postComment", formValues)
-        .then((res) => {
-          console.log(res.data);
-          navigate("/");
-        })
+        .post("http://localhost:3000/postComment/comments", formValues)
+        .catch(err => console.log(err));
+      axios
+        .post(`http://localhost:3000/postComment/titles/${formValues.title}`, formValues)
+        .then(res => navigate("/"))
         .catch(err => console.log(err));
     }
     console.log(formValues)
